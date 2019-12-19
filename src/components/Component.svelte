@@ -2,11 +2,12 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	const onChange = (event) => {
+	let text = "";
+	$: {
 		dispatch("message", {
-			text: event.target.value
+			text: text
 		});
-	};
+	}
 
 	let count = 0;
 	$: countSquared = count**2;
@@ -18,7 +19,7 @@
 
 <div>
 	<p>Input:</p>
-	<input type="text" on:change={onChange}/>
+	<input type="text" bind:value={text}/>
 	<button on:click={onClick}>
 		{countSquared}
 	</button>
