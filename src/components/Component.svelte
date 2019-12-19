@@ -2,12 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	let text = "";
-	$: {
-		dispatch("message", {
-			text: text
-		});
-	}
+	export let text = "";
 
 	let count = 0;
 	$: countSquared = count**2;

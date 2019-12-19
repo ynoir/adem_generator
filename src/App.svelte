@@ -2,15 +2,12 @@
 	import Component from "./components/Component.svelte";
 	import Out from "./components/Out.svelte";
 	export let name;
-	const onMessage = (event) => {
-		name = event.detail.text;
-	};
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-	<Component on:message={onMessage}/>
+	<Component bind:text={name}/>
 	<Out text={"some text"}/>
 </main>
 
