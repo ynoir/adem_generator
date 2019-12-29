@@ -1,21 +1,13 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
-
 	export let text = "";
-
-	let count = 0;
-	$: countSquared = count**2;
-
-	let onClick = () => {
-		count += 1;
-	};
+	export let fontsize = "";
 </script>
 
 <div>
-	<p>Input:</p>
+	<p>text:</p>
 	<input type="text" bind:value={text}/>
-	<button on:click={onClick}>
-		{countSquared}
-	</button>
+	<p>font size:</p>
+	<input type="text" bind:value={fontsize}/>
 </div>

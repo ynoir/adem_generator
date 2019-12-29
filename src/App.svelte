@@ -1,14 +1,26 @@
 <script>
-	import Component from "./components/Component.svelte";
-	import Out from "./components/Out.svelte";
-	export let name;
+	import TextInput from "./components/TextInput.svelte";
+	import domtoimage from "dom-to-image";
+	import FileSaver from "file-saver";
+
+	export let text = "grateful";
+	export let fontsize = 1.4;
+
+	const save = () => {
+		domtoimage.toBlob(document.getElementById("adem"))
+			.then(function (blob) {
+				FileSaver.saveAs(blob, "adem_" + text + ".png");
+			});
+	};
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-	<Component bind:text={name}/>
-	<Out text={"some text"}/>
+	<div id="adem" class="icon">
+		<img alt="adem face" src="/adem_face.png"/>
+		<div class="text" style="font-size: {fontsize}em">{text}</div>
+	</div>
+	<TextInput bind:text={text} bind:fontsize={fontsize}/>
+	<button on:click={save}>save</button>
 </main>
 
 <style>
@@ -19,18 +31,18 @@
 		margin: 0 auto;
 	}
 
-	h1 {
-		color: #ff3e00;
+	.icon {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		height: 120px;
+		width: 120px;
+		background-color: #911a1e;
+	}
+
+	.text {
+		color: #ffffff;
 		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+		font-weight: 800;
 	}
-	p {
-		color: green;
-	}
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+
 </style>
